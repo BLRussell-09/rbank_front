@@ -1,7 +1,7 @@
 import React from 'react';
 import requests from './member_requests';
 import acct_requests from '../accounts/account_requests';
-import {ListGroup, ListGroupItem, Alert, Row, Col} from 'react-bootstrap';
+import {ListGroup, ListGroupItem, Alert, Row, Col, Badge} from 'react-bootstrap';
 import Account from '../accounts/account';
 
 
@@ -38,7 +38,14 @@ class Member extends React.Component
         this.setState({account: account});
       };
 
-      return <ListGroupItem key={account.id} action onClick={set_account}>Account Number:{account.id} Open Date: {account.open_date}</ListGroupItem>
+      return (<ListGroupItem key={account.id} action onClick={set_account} className="d-flex justify-content-between align-items-start">
+              <div>
+                {account.account_type}: {account.id}
+              </div>
+              <Badge variant='primary' pill>
+                Balance: ${account.balance}
+              </Badge>
+            </ListGroupItem>)
     });
 
     const account_component = ((account) => {
@@ -54,14 +61,15 @@ class Member extends React.Component
         <h2>{this.state.member.first_name} {this.state.member.last_name}</h2>
         <Row>
           <Col md={4}>
-            <ul>
-              <li>SSN: {this.state.member.ssn}</li>
-              <li>Address 1: {this.state.member.address_one}</li>
-              <li>Address 2: {this.state.member.address_two}</li>
-              <li>City: {this.state.member.city}</li>
-              <li>State: {this.state.member.state}</li>
-              <li>Zip Code: {this.state.member.zip_code}</li>
-            </ul>
+            <ListGroup variant='flush'>
+              <ListGroupItem>Birthday: {this.state.member.zip_code}</ListGroupItem>
+              <ListGroupItem>SSN: {this.state.member.ssn}</ListGroupItem>
+              <ListGroupItem>Address 1: {this.state.member.address_one}</ListGroupItem>
+              <ListGroupItem>Address 2: {this.state.member.address_two}</ListGroupItem>
+              <ListGroupItem>City: {this.state.member.city}</ListGroupItem>
+              <ListGroupItem>State: {this.state.member.state}</ListGroupItem>
+              <ListGroupItem>Zip Code: {this.state.member.zip_code}</ListGroupItem>
+            </ListGroup>
           </Col>
           <Col md={4}>
             <ListGroup>
