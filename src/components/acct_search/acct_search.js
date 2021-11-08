@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button} from 'react-bootstrap';
+import { Form, Button, Row, Col} from 'react-bootstrap';
 import member from './requests/member';
 
 class AcctSearch extends React.Component
@@ -12,43 +12,40 @@ class AcctSearch extends React.Component
   }
 
   state = {
-    members: [],
-    id: ''
-  }
-
-  componentDidMount(){
-    member.getMembers()
-    .then((res) => {
-      console.log(res)
-    })
-    .catch();
+    member_number: ''
   }
 
   handleChange(e){
-    this.setState({id: e.target.value})
+     if(e.target.value.length > 0){
+       this.setState({member_number: e.target.value})
+     }
   }
 
   handleSubmit(e){
     e.preventDefault();
-    member.getMember(this.state.id)
-    .then((res) => {
-      console.log(res)
-    }).catch()
+    this.props.memberNumChange(this.state.member_number)
   }
 
   render(){
     return(
-      <Form>
-        <Form.Control
-        size='lg'
-        type='text'
-        placeholder='Search...'
-        onChange={this.handleChange}
-        />
-        <Button variant="primary" type="submit" onClick={this.handleSubmit} onSubmit={this.handleSubmit}>
-          Submit
-        </Button>
-      </Form>
+      <div>
+        <Row>
+          <Col md={3} offset={3}>
+          <Form>
+              <Form.Control
+              size='lg'
+              type='number'
+              placeholder='Search...'
+              onChange={this.handleChange}
+              />
+              <Button variant="primary" type="submit" onClick={this.handleSubmit} onSubmit={this.handleSubmit}>
+                Submit
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </div>
+
     )
   }
 }
