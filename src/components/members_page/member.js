@@ -1,10 +1,9 @@
 import React from 'react';
 import requests from './member_requests';
 import acct_requests from '../accounts/account_requests';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
+import {ListGroup, ListGroupItem, Alert, Row, Col} from 'react-bootstrap';
 import Account from '../accounts/account';
+
 
 class Member extends React.Component
 {
@@ -26,7 +25,9 @@ class Member extends React.Component
         acct_requests.getAccounts(this.props.memnum).then((res) => {
           this.setState({accounts: res})
         })
-      }).catch();
+      }).catch((err) => {
+        alert(`This member could not be found, please see the following error message for more details: ${err.message}`)
+      });
     }
   }
 
