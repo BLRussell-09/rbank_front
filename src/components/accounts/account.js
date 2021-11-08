@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class Account extends React.Component {
   constructor(props){
@@ -22,12 +22,14 @@ class Account extends React.Component {
 
     return(
       <div>
-        <h1>Account Details:</h1>
+        <h1>{this.state.account.account_type} {this.state.account.id} Details:</h1>
         <Row>
-          <Col md={4}>
-            <ul>
-              <li>Account Status: {(this.state.account.close_date != null) ? 'Closed' : 'Open'}</li>
-            </ul>
+          <Col lg={8} md={3} sm={6}>
+            <ListGroup>
+              <ListGroupItem>Account Status: {(this.state.account.close_date != null) ? 'Closed' : 'Open'}</ListGroupItem>
+              <ListGroupItem>Open Date: {this.state.account.open_date}</ListGroupItem>
+              <ListGroupItem>Balance: {this.state.account.balance}</ListGroupItem>
+            </ListGroup>
           </Col>
         </Row>
       </div>
