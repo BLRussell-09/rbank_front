@@ -21,7 +21,7 @@ const getMembers = () =>
 {
   return new Promise((resolve, reject) =>
   {
-    axios.get('http://localhost:8000/api/members/').then((res) =>
+    axios.get('/users/').then((res) =>
     {
       resolve(fluffData(res.data));
     }).catch((err) =>
@@ -31,17 +31,20 @@ const getMembers = () =>
   });
 };
 
-const getMember = (memberNum) =>
+const getMember = (id) =>
 {
   return new Promise((resolve, reject) =>
   {
-    axios.get(`http://localhost:8000/api/members/${memberNum}/`).then((res) =>
+    axios.get(`/users/${id}`).then((res) =>
     {
-      resolve(res.data);
-    }).catch((err) => {
-      reject(err);
-    })
-  })
-}
+      resolve(res.data)
+      console.log(res.data)
+    }).catch((err) =>
+    {
+      console.log(err)
+      reject(err)
+    });
+  });
+};
 
 export default {getMembers, getMember};

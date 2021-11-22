@@ -1,7 +1,7 @@
 import React from 'react';
-import requests from './member_requests';
-import acct_requests from '../accounts/account_requests';
-import {ListGroup, ListGroupItem, Alert, Row, Col, Badge} from 'react-bootstrap';
+import requests from './requests';
+import acct_requests from '../accounts/requests';
+import {ListGroup, ListGroupItem, Row, Col, Badge} from 'react-bootstrap';
 import Account from '../accounts/account';
 
 
@@ -22,9 +22,7 @@ class Member extends React.Component
       requests.getMember(this.props.memnum).then((res) => {
         this.setState({account: {}})
         this.setState({member: res})
-        acct_requests.getAccounts(this.props.memnum).then((res) => {
-          this.setState({accounts: res})
-        })
+        this.setState({accounts: res.accounts})
       }).catch((err) => {
         alert(`This member could not be found, please see the following error message for more details: ${err.message}`)
       });
@@ -77,11 +75,7 @@ class Member extends React.Component
             </ListGroup>
           </Col>
         </Row>
-        <Row>
-          <Col md={4} offset={3}>
-            {account_component(this.state.account)}
-          </Col>
-        </Row>
+        {account_component(this.state.account)}
       </div>
     )
   }
