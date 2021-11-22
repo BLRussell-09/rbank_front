@@ -1,5 +1,5 @@
 import React from 'react';
-import requests from './member_requests';
+import requests from './requests';
 import Row from 'react-bootstrap/Row';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import Member from './member';

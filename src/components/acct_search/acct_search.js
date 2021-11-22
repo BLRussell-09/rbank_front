@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Button, Row, Col} from 'react-bootstrap';
-import member from './requests/member';
 
 class AcctSearch extends React.Component
 {
